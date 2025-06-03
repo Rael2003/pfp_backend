@@ -1,10 +1,16 @@
 package com.mycompany.pfp.models;
 
+import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-public class funcionario {
+@Entity
+@Table(name = "funcionarios")
+public class Funcionario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
     private String nomeCompleto;
     private LocalDate dataDeNascimento;
     private String cpf;
@@ -22,5 +28,4 @@ public class funcionario {
     private String agencia;
     private String contaBancaria;
     private LocalDate exameAdmissional;
-    
 }
