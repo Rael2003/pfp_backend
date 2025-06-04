@@ -1,6 +1,5 @@
 package com.mycompany.pfp.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -8,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.pfp.models.Funcionario;
-import com.mycompany.pfp.models.FuncionarioDTO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import com.mycompany.pfp.services.Usuario;
 import com.mycompany.pfp.services.FuncionarioService;
 
@@ -18,7 +17,6 @@ import com.mycompany.pfp.services.FuncionarioService;
 @RestController
 public class FuncionarioController {
 
-    private List<FuncionarioDTO> funcionarios = new ArrayList<FuncionarioDTO>();
     private final FuncionarioService serv;
 
     public FuncionarioController(FuncionarioService serv) {
@@ -31,17 +29,13 @@ public class FuncionarioController {
     }
 
     @PostMapping(path = "/funcionarios")
-    public ResponseEntity<String> postMethodName(@RequestParam String login,String senha,String funcionario) {
-        
+    public ResponseEntity<String> postMethodName(@RequestParam String login, @RequestParam String senha, @RequestBody Funcionario funcionario) {
         if(Usuario.validarUsuario(login, senha)){
-            FuncionarioDTO func =  new FuncionarioDTO();
-            func.nomeCompleto = funcionario;
-            funcionarios.add(func);
+            serv.AddFunc(funcionario);
             return ResponseEntity.ok("Ok");
         }else{
             return ResponseEntity.badRequest().body("Login e/ou senha Inválidos!");
         }
-        
     }
     
 

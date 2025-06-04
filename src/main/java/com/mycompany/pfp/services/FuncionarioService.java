@@ -16,7 +16,10 @@ public class FuncionarioService {
 
     public List<Funcionario> ListAll() {
         return funcionarioRepository.findAll();
+    }
 
+    public void AddFunc(Funcionario func){
+        funcionarioRepository.save(func);
     }
     
 }
