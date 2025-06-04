@@ -3,6 +3,7 @@ package com.mycompany.pfp.controllers;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,6 +37,12 @@ public class FuncionarioController {
         }else{
             return ResponseEntity.badRequest().body("Login e/ou senha Inválidos!");
         }
+    }
+
+    @DeleteMapping(path = "/funcionarios")
+    public ResponseEntity<String> deleteFunc(@RequestParam long idFunc){
+        serv.DeleteFunc(idFunc);
+        return ResponseEntity.ok("Ok");
     }
     
 
