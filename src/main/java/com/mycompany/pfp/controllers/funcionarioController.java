@@ -51,8 +51,4 @@ public class FuncionarioController {
         serv.UpdateFunc(idFunc,json);
         return ResponseEntity.ok("Ok");
     }
-
-    
-
-
 }
