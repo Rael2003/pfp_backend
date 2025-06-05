@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.pfp.models.Funcionario;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestBody;
 import com.mycompany.pfp.services.Usuario;
@@ -44,6 +45,13 @@ public class FuncionarioController {
         serv.DeleteFunc(idFunc);
         return ResponseEntity.ok("Ok");
     }
+
+    @PutMapping(path = "/funcionarios")
+    public ResponseEntity<String> updateFunc(@RequestParam long idFunc, @RequestBody Funcionario json){
+        serv.UpdateFunc(idFunc,json);
+        return ResponseEntity.ok("Ok");
+    }
+
     
 
 
