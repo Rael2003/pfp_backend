@@ -33,7 +33,25 @@ public class ClienteService {
         
     }
 
-    public void UpdateCli(long idCli,Cliente cli){
-        
+    public void UpdateCli(long idCli,Cliente nCli){
+        Cliente aCli = ListOne(idCli);
+        aCli.setBairro(nCli.getBairro());
+        aCli.setCargoResponsavel(nCli.getCargoResponsavel());
+        aCli.setCep(nCli.getCep());
+        aCli.setCidade(nCli.getCidade());
+        aCli.setCnpj(nCli.getCnpj());
+        aCli.setComplemento(nCli.getComplemento());
+        aCli.setEmail(nCli.getEmail());
+        aCli.setEmailResponsavel(nCli.getEmailResponsavel());
+        aCli.setEndereco(nCli.getEndereco());
+        aCli.setEstado(nCli.getEstado());
+        aCli.setInscricaoEstadual(nCli.getInscricaoEstadual());
+        aCli.setNomeResponsavel(nCli.getNomeResponsavel());
+        aCli.setNumero(nCli.getNumero());
+        aCli.setTelefone(nCli.getTelefone());
+        aCli.setTelefoneResponsavel(nCli.getTelefoneResponsavel());
+        aCli.setNomeEmpresa(nCli.getNomeEmpresa());
+
+        clienteRepository.save(aCli);
     }
 }
