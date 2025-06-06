@@ -11,42 +11,42 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mycompany.pfp.models.Cliente;
-import com.mycompany.pfp.services.ClienteService;
+import com.mycompany.pfp.models.Estoque;
+import com.mycompany.pfp.services.EstoqueService;
 import com.mycompany.pfp.services.Usuario;
 
 @RestController
-public class ClienteController {
-    private final ClienteService serv;
+public class EstoqueController {
+    private final EstoqueService serv;
 
-    public ClienteController(ClienteService serv) {
+    public EstoqueController(EstoqueService serv) {
         this.serv = serv;
     }
     
-    @GetMapping(path = "/clientes")
-    public List<Cliente> ListaClientes(){
+    @GetMapping(path = "/estoque")
+    public List<Estoque> ListaEstoque(){
         return serv.ListAll();
     }
 
-    @PostMapping(path = "/clientes")
-    public ResponseEntity<String> postMethodName(@RequestParam String login, @RequestParam String senha, @RequestBody Cliente cliente) {
+    @PostMapping(path = "/estoque")
+    public ResponseEntity<String> postMethodName(@RequestParam String login, @RequestParam String senha, @RequestBody Estoque estoque) {
         if(Usuario.validarUsuario(login, senha)){
-            serv.AddCli(cliente);
+            serv.AddEst(estoque);
             return ResponseEntity.ok("Ok");
         }else{
             return ResponseEntity.badRequest().body("Login e/ou senha Inválidos!");
         }
     }
 
-    @DeleteMapping(path = "/clientes")
-    public ResponseEntity<String> deleteCli(@RequestParam long idCli){
-        serv.DeleteCli(idCli);
+    @DeleteMapping(path = "/estoque")
+    public ResponseEntity<String> deleteEst(@RequestParam long id){
+        serv.DeleteEst(id);
         return ResponseEntity.ok("Ok");
     }
 
-    @PutMapping(path = "/clientes")
-    public ResponseEntity<String> updateCli(@RequestParam long idCli, @RequestBody Cliente json){
-        serv.UpdateCli(idCli,json);
+    @PutMapping(path = "/estoque")
+    public ResponseEntity<String> updateEst(@RequestParam long id, @RequestBody Estoque json){
+        serv.UpdateEst(id,json);
         return ResponseEntity.ok("Ok");
     }
 }
