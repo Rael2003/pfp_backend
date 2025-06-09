@@ -41,14 +41,14 @@ public class FuncionarioController {
     }
 
     @DeleteMapping(path = "/funcionarios")
-    public ResponseEntity<String> deleteFunc(@RequestParam long idFunc){
-        serv.DeleteFunc(idFunc);
+    public ResponseEntity<String> deleteFunc(@RequestParam long id){
+        serv.DeleteFunc(id);
         return ResponseEntity.ok("Ok");
     }
 
     @PutMapping(path = "/funcionarios")
-    public ResponseEntity<String> updateFunc(@RequestParam long idFunc, @RequestBody Funcionario json){
-        serv.UpdateFunc(idFunc,json);
+    public ResponseEntity<String> updateFunc(@RequestParam long id, @RequestBody Funcionario json){
+        serv.UpdateFunc(id,json);
         return ResponseEntity.ok("Ok");
     }
 }

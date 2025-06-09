@@ -39,14 +39,14 @@ public class ClienteController {
     }
 
     @DeleteMapping(path = "/clientes")
-    public ResponseEntity<String> deleteCli(@RequestParam long idCli){
-        serv.DeleteCli(idCli);
+    public ResponseEntity<String> deleteCli(@RequestParam long id){
+        serv.DeleteCli(id);
         return ResponseEntity.ok("Ok");
     }
 
     @PutMapping(path = "/clientes")
-    public ResponseEntity<String> updateCli(@RequestParam long idCli, @RequestBody Cliente json){
-        serv.UpdateCli(idCli,json);
+    public ResponseEntity<String> updateCli(@RequestParam long id, @RequestBody Cliente json){
+        serv.UpdateCli(id,json);
         return ResponseEntity.ok("Ok");
     }
 }

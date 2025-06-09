@@ -61,14 +61,14 @@ public class ProjetoController {
     }
 
     @DeleteMapping(path = "/projetos")
-    public ResponseEntity<String> deleteProj(@RequestParam long idProj){
-        serv.DeleteProj(idProj);
+    public ResponseEntity<String> deleteProj(@RequestParam long id){
+        serv.DeleteProj(id);
         return ResponseEntity.ok("Ok");
     }
 
     @PutMapping(path = "/projetos")
-    public ResponseEntity<String> updateProj(@RequestParam long idProj, @RequestBody ProjetoDTO json){
-        serv.UpdateProj(idProj,json);
+    public ResponseEntity<String> updateProj(@RequestParam long id, @RequestBody ProjetoDTO json){
+        serv.UpdateProj(id,json);
         return ResponseEntity.ok("Ok");
     }
 }

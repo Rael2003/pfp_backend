@@ -36,9 +36,6 @@ public class ItemProjetoController {
     @PostMapping(path = "/item")
     public ResponseEntity<String> postMethodName(@RequestParam String login, @RequestParam String senha, @RequestBody ItemProjetoDTO itemProjeto) {
         if(Usuario.validarUsuario(login, senha)){
-            System.out.println("*******************");
-            System.out.println(itemProjeto.getProjeto());
-            System.out.println("*******************");
             Projeto projeto = servProj.ListOne(itemProjeto.getProjeto());
             
             
@@ -58,14 +55,14 @@ public class ItemProjetoController {
     }
 
     @DeleteMapping(path = "/item")
-    public ResponseEntity<String> deleteProj(@RequestParam long idProj){
-        serv.DeleteItem(idProj);
+    public ResponseEntity<String> deleteProj(@RequestParam long id){
+        serv.DeleteItem(id);
         return ResponseEntity.ok("Ok");
     }
 
     @PutMapping(path = "/item")
-    public ResponseEntity<String> updateProj(@RequestParam long idProj, @RequestBody ItemProjetoDTO json){
-        serv.UpdateItem(idProj,json);
+    public ResponseEntity<String> updateProj(@RequestParam long id, @RequestBody ItemProjetoDTO json){
+        serv.UpdateItem(id,json);
         return ResponseEntity.ok("Ok");
     }
 }
