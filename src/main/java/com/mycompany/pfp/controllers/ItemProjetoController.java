@@ -33,6 +33,12 @@ public class ItemProjetoController {
         return serv.ListAll();
     }
 
+    @GetMapping(path = "/itemPorProjeto")
+    public ResponseEntity<List<ItemProjeto>> listarPorProjeto(@RequestParam Long id){
+        List<ItemProjeto> itens = serv.listarItensPorProjeto(id);
+        return ResponseEntity.ok(itens);
+    }
+
     @PostMapping(path = "/item")
     public ResponseEntity<String> postMethodName(@RequestParam String login, @RequestParam String senha, @RequestBody ItemProjetoDTO itemProjeto) {
         if(Usuario.validarUsuario(login, senha)){

@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.pfp.models.Cliente;
 import com.mycompany.pfp.models.Funcionario;
+import com.mycompany.pfp.models.ItemProjeto;
 import com.mycompany.pfp.models.Projeto;
+import com.mycompany.pfp.models.ProjetoAtribuicaoDTO;
 import com.mycompany.pfp.models.ProjetoDTO;
 import com.mycompany.pfp.models.ProjetoUrgente;
 import com.mycompany.pfp.services.ClienteService;
 import com.mycompany.pfp.services.FuncionarioService;
+import com.mycompany.pfp.services.ItemProjetoService;
 import com.mycompany.pfp.services.ProjetoService;
 import com.mycompany.pfp.services.Usuario;
 
@@ -27,11 +30,13 @@ public class ProjetoController {
     private final ProjetoService serv;
     private final FuncionarioService servFunc;
     private final ClienteService servCli;
+    private final ItemProjetoService servItem;
 
-    public ProjetoController(ProjetoService serv,FuncionarioService servFunc,ClienteService servCli) {
+    public ProjetoController(ProjetoService serv,FuncionarioService servFunc,ClienteService servCli, ItemProjetoService servItem) {
         this.serv = serv;
         this.servFunc = servFunc;
         this.servCli = servCli;
+        this.servItem = servItem;
     }
     
     @GetMapping(path = "/projetos")
@@ -63,6 +68,37 @@ public class ProjetoController {
         
         
         return listUrg;
+    }
+
+    @GetMapping(path = "/projetosAtribuicao")
+    public List<ProjetoAtribuicaoDTO> ListaAtribuicao(){
+        List<Projeto> projs = serv.ListAll();
+        List<ProjetoAtribuicaoDTO> list = new ArrayList<>();
+
+
+        for (Projeto projeto : projs) {
+            List<ItemProjeto> itens = servItem.listarItensPorProjeto(projeto.getId());
+            for (ItemProjeto projetoAtribuicaoDTO : itens) {
+                ProjetoAtribuicaoDTO urg = new ProjetoAtribuicaoDTO();
+
+                urg.setDataInicio(projeto.getDataInicio());
+                urg.setDataPrevisaoEntrega(projeto.getDataPrevisaoEntrega());
+                urg.setEmpresaCliente(projeto.getEmpresaClienteId().getNomeEmpresa());
+                urg.setEmpresaClienteId(projeto.getEmpresaClienteId().getId());
+                urg.setFuncionarioResponsavel(projeto.getFuncionarioResponsavelId().getNome_completo());
+                urg.setFuncionarioResponsavelId(projeto.getFuncionarioResponsavelId().getId());
+                urg.setNomeProjeto(projeto.getNomeProjeto());
+                urg.setStatus(projeto.getStatus());
+                urg.setProjetoItemId(projetoAtribuicaoDTO.getId());
+                urg.setTitulo_item(projetoAtribuicaoDTO.getTitulo_item());
+                urg.setQuantidade(projetoAtribuicaoDTO.getQuantidade());
+
+                list.add(urg);
+            }
+        }
+        
+        
+        return list;
     }
 
     @PostMapping(path = "/projetos")

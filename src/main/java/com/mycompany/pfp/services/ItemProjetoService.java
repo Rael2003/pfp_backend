@@ -21,6 +21,10 @@ public class ItemProjetoService {
         return itemProjetoRepository.findAll();
     }
 
+    public List<ItemProjeto> listarItensPorProjeto(Long projetoId) {
+        return itemProjetoRepository.findByProjetoId(projetoId);
+    }
+
     public void AddItem(ItemProjeto item){
         itemProjetoRepository.save(item);
     }

@@ -34,6 +34,9 @@ public class ItemProjeto {
     @Column(name = "data_conclusao")
     private LocalDate data_conclusao;
 
+    @Column(name = "quantidade")
+    private Integer quantidade;
+
     public Integer getId() {
         return id;
     }
@@ -92,6 +95,14 @@ public class ItemProjeto {
 
     public void setData_conclusao(LocalDate data_conclusao) {
         this.data_conclusao = data_conclusao;
+    }
+
+    public Integer getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(Integer quantidade) {
+        this.quantidade = quantidade;
     }
 
     
