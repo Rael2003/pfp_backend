@@ -10,7 +10,7 @@ public class ItemProjeto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "projeto_id", nullable = false)
@@ -37,7 +37,7 @@ public class ItemProjeto {
     @Column(name = "quantidade")
     private Integer quantidade;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
     

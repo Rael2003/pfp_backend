@@ -10,7 +10,7 @@ public class Estoque {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column(name = "nome_produto")
     private String nomeProduto;
@@ -39,7 +39,7 @@ public class Estoque {
     @Column(name = "validade")
     private LocalDate validade;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 

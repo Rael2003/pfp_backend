@@ -1,5 +1,6 @@
 package com.mycompany.pfp.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import com.mycompany.pfp.models.Estoque;
 import com.mycompany.pfp.models.ItemProjeto;
 import com.mycompany.pfp.models.PedidoEstoque;
 import com.mycompany.pfp.models.PedidoEstoqueDTO;
+import com.mycompany.pfp.models.PedidoEstoqueProjetoDTO;
 import com.mycompany.pfp.services.EstoqueService;
 import com.mycompany.pfp.services.ItemProjetoService;
 import com.mycompany.pfp.services.PedidoEstoqueService;
@@ -36,6 +38,28 @@ public class PedidoEstoqueController {
     @GetMapping(path = "/pedidoEstoque")
     public List<PedidoEstoque> Listaprojetos(){
         return serv.ListAll();
+    }
+
+    @GetMapping(path = "/pedidoEstoqueProj")
+    public List<PedidoEstoqueProjetoDTO> ListaprojetosPorId(@RequestParam Long id){
+        List<PedidoEstoqueProjetoDTO> fin = new ArrayList<>();;
+        List<PedidoEstoque> ped = serv.ListProj(id);
+        
+        for (PedidoEstoque pedidoEstoque : ped) {
+            PedidoEstoqueProjetoDTO dado = new PedidoEstoqueProjetoDTO();
+            dado.setDataPedido(pedidoEstoque.getDataPedido());
+            dado.setItemProjetoId(pedidoEstoque.getItemProjetoId().getId());
+            dado.setProdutoEstoqueId(pedidoEstoque.getProdutoEstoqueId().getId());
+            dado.setQuantidadeAtendida(pedidoEstoque.getQuantidadeAtendida());
+            dado.setQuantidadeSolicitada(pedidoEstoque.getQuantidadeSolicitada());
+            dado.setStatus(pedidoEstoque.getStatus());
+            dado.setItemProjeto(pedidoEstoque.getItemProjetoId().getTitulo_item());
+
+            fin.add(dado);
+        }
+
+        return fin;
+
     }
 
     @PostMapping(path = "/pedidoEstoque")

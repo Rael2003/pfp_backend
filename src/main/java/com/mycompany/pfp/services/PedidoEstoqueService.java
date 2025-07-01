@@ -31,6 +31,10 @@ public class PedidoEstoqueService {
     public PedidoEstoque ListOne(long idItem){
         return pedidoEstoqueRepository.getReferenceById(idItem);
     }
+
+    public List<PedidoEstoque> ListProj(long idItem){
+        return pedidoEstoqueRepository.findByProjetoId(idItem);
+    }
     public void DeleteItem(long idItem){
         PedidoEstoque item = ListOne(idItem);
         if(item.getId() != null){

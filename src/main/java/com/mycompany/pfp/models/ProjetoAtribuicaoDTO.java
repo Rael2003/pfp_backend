@@ -11,7 +11,7 @@ public class ProjetoAtribuicaoDTO {
     private String empresaCliente;
     private Long funcionarioResponsavelId;
     private String funcionarioResponsavel;
-    private Integer projetoItemId;
+    private Long projetoItemId;
     private String titulo_item;
     private Integer quantidade;
 
@@ -63,10 +63,10 @@ public class ProjetoAtribuicaoDTO {
     public void setFuncionarioResponsavel(String funcionarioResponsavel) {
         this.funcionarioResponsavel = funcionarioResponsavel;
     }
-    public Integer getProjetoItemId() {
+    public Long getProjetoItemId() {
         return projetoItemId;
     }
-    public void setProjetoItemId(Integer projetoItemId) {
+    public void setProjetoItemId(Long projetoItemId) {
         this.projetoItemId = projetoItemId;
     }
     public String getTitulo_item() {
