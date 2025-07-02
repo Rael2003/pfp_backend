@@ -22,9 +22,10 @@ public class FuncionarioService {
         funcionarioRepository.save(func);
     }
 
-    public Funcionario ListOne(long idFunc){
-        return funcionarioRepository.getReferenceById(idFunc);
+    public Funcionario ListOne(long id){
+        return funcionarioRepository.getReferenceById(id);
     }
+    
     public void DeleteFunc(long idFunc){
         Funcionario func = ListOne(idFunc);
         if(func.getId() != null){

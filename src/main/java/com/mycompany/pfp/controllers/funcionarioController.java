@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mycompany.pfp.models.Funcionario;
+import com.mycompany.pfp.models.FuncionarioDTO;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,14 +31,25 @@ public class FuncionarioController {
         return serv.ListAll();
     }
 
+    @GetMapping(path = "/funcionarioid")
+    public FuncionarioDTO ListaPorId(@RequestParam Long id){
+        System.out.println("***********************");
+        System.out.println(id);
+        System.out.println("***********************");
+
+        Funcionario f = serv.ListOne(id);
+        return new FuncionarioDTO(f);
+    }
+
     @PostMapping(path = "/funcionarios")
-    public ResponseEntity<String> postMethodName(@RequestParam String login, @RequestParam String senha, @RequestBody Funcionario funcionario) {
-        if(Usuario.validarUsuario(login, senha)){
+    public ResponseEntity<String> postMethodName(@RequestBody Funcionario funcionario) {
+        //@RequestParam String login, @RequestParam String senha, 
+        //if(Usuario.validarUsuario(login, senha)){
             serv.AddFunc(funcionario);
             return ResponseEntity.ok("Ok");
-        }else{
-            return ResponseEntity.badRequest().body("Login e/ou senha Inválidos!");
-        }
+        //}else{
+        //    return ResponseEntity.badRequest().body("Login e/ou senha Inválidos!");
+        //}
     }
 
     @DeleteMapping(path = "/funcionarios")

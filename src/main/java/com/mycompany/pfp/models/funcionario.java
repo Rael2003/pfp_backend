@@ -50,6 +50,14 @@ public class Funcionario {
     @Column(name = "exame_admissional")
     private LocalDate exame_admissional;
 
+    
+
+    public LocalDate getExame_admissional() {
+        return exame_admissional;
+    }
+    public void setExame_admissional(LocalDate exame_admissional) {
+        this.exame_admissional = exame_admissional;
+    }
     public String getNome_completo() {
         return nome_completo;
     }
