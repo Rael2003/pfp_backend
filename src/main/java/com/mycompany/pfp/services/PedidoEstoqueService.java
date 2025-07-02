@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.mycompany.pfp.models.ItemProjeto;
 import com.mycompany.pfp.models.PedidoEstoque;
 import com.mycompany.pfp.models.PedidoEstoqueDTO;
 import com.mycompany.pfp.repositories.PedidoEstoqueRepository;
@@ -32,8 +33,8 @@ public class PedidoEstoqueService {
         return pedidoEstoqueRepository.getReferenceById(idItem);
     }
 
-    public List<PedidoEstoque> ListProj(long idItem){
-        return pedidoEstoqueRepository.findByProjetoId(idItem);
+    public List<PedidoEstoque> ListProj(ItemProjeto idItem){
+        return pedidoEstoqueRepository.findByItemProjetoId(idItem);
     }
     public void DeleteItem(long idItem){
         PedidoEstoque item = ListOne(idItem);

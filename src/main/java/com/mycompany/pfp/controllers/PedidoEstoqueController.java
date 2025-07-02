@@ -42,8 +42,9 @@ public class PedidoEstoqueController {
 
     @GetMapping(path = "/pedidoEstoqueProj")
     public List<PedidoEstoqueProjetoDTO> ListaprojetosPorId(@RequestParam Long id){
-        List<PedidoEstoqueProjetoDTO> fin = new ArrayList<>();;
-        List<PedidoEstoque> ped = serv.ListProj(id);
+        List<PedidoEstoqueProjetoDTO> fin = new ArrayList<>();
+        ItemProjeto item = servItem.ListOne(id);
+        List<PedidoEstoque> ped = serv.ListProj(item);
         
         for (PedidoEstoque pedidoEstoque : ped) {
             PedidoEstoqueProjetoDTO dado = new PedidoEstoqueProjetoDTO();

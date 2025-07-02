@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class ItemProjetoDTO {
 
-    private Integer id;
+    private Long id;
     private Long projeto;
     private String titulo_item;
     private String descricao;
@@ -13,10 +13,10 @@ public class ItemProjetoDTO {
     private LocalDate data_entrega_prevista;
     private LocalDate data_conclusao;
     
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public Long getProjeto() {
