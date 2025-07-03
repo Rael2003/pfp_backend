@@ -44,6 +44,11 @@ public class ProjetoController {
         return serv.ListAll();
     }
 
+    @GetMapping(path = "/projetosSemAtribuicao")
+    public List<Projeto> ListaProjetosSemAtribuicao(){
+        return serv.ListProjNoFunc();
+    }
+
     @GetMapping(path = "/projetosUrgentes")
     public List<ProjetoUrgente> ListaUrgentes(){
         List<Projeto> projs = serv.ListAll();

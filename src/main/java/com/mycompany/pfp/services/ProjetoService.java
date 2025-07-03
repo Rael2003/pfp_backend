@@ -24,6 +24,10 @@ public class ProjetoService {
         return projetoRepository.findAll();
     }
 
+    public List<Projeto> ListProjNoFunc() {
+        return projetoRepository.findByFuncionarioResponsavelIdIsNull();
+    }
+
     public void AddProj(Projeto proj){
         projetoRepository.save(proj);
     }

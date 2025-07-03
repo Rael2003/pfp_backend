@@ -32,10 +32,6 @@ public class FuncionarioController {
 
     @GetMapping(path = "/funcionarioid")
     public FuncionarioDTO ListaPorId(@RequestParam Long id){
-        System.out.println("***********************");
-        System.out.println(id);
-        System.out.println("***********************");
-
         Funcionario f = serv.ListOne(id);
         return new FuncionarioDTO(f);
     }
