@@ -45,8 +45,31 @@ public class ProjetoController {
     }
 
     @GetMapping(path = "/projetosSemAtribuicao")
-    public List<Projeto> ListaProjetosSemAtribuicao(){
-        return serv.ListProjNoFunc();
+    public List<ProjetoDTO> ListaProjetosSemAtribuicao(){
+        List<Projeto> projeto = serv.ListProjNoFunc();
+        List<ProjetoDTO> ret = new ArrayList<>();
+        
+        for (Projeto lt : projeto) {
+            ProjetoDTO tmp = new ProjetoDTO();
+
+            tmp.setId(lt.getId());
+            tmp.setDescricao(lt.getDescricao());
+            tmp.setDataInicio(lt.getDataInicio());
+            tmp.setDataPrevisaoEntrega(lt.getDataPrevisaoEntrega());
+            tmp.setEmpresaCliente(lt.getEmpresaClienteId().getNomeEmpresa());
+            tmp.setEmpresaClienteId(lt.getEmpresaClienteId().getId());
+            if(lt.getFuncionarioResponsavelId() != null){
+                tmp.setFuncionarioResponsavel(lt.getFuncionarioResponsavelId().getNome_completo());
+                tmp.setFuncionarioResponsavelId(lt.getFuncionarioResponsavelId().getId());
+            }
+            tmp.setNomeProjeto(lt.getNomeProjeto());
+            tmp.setPrioridade(lt.getPrioridade());
+            tmp.setStatus(lt.getStatus());
+
+            ret.add(tmp);
+        }
+        return ret;
+
     }
 
     @GetMapping(path = "/projetosUrgentes")
@@ -62,8 +85,10 @@ public class ProjetoController {
             urg.setDataPrevisaoEntrega(projeto.getDataPrevisaoEntrega());
             urg.setEmpresaCliente(projeto.getEmpresaClienteId().getNomeEmpresa());
             urg.setEmpresaClienteId(projeto.getEmpresaClienteId().getId());
-            urg.setFuncionarioResponsavel(projeto.getFuncionarioResponsavelId().getNome_completo());
-            urg.setFuncionarioResponsavelId(projeto.getFuncionarioResponsavelId().getId());
+            if(projeto.getFuncionarioResponsavelId() != null){
+                urg.setFuncionarioResponsavel(projeto.getFuncionarioResponsavelId().getNome_completo());
+                urg.setFuncionarioResponsavelId(projeto.getFuncionarioResponsavelId().getId());
+            }
             urg.setNomeProjeto(projeto.getNomeProjeto());
             urg.setPrioridade(projeto.getPrioridade());
             urg.setStatus(projeto.getStatus());
@@ -109,18 +134,22 @@ public class ProjetoController {
     @PostMapping(path = "/projetos")
     public ResponseEntity<String> postMethodName(@RequestParam String login, @RequestParam String senha, @RequestBody ProjetoDTO projeto) {
         if(Usuario.validarUsuario(login, senha)){
-            Funcionario func = servFunc.ListOne(projeto.getFuncionarioResponsavelId());
-            Cliente cli = servCli.ListOne(projeto.getEmpresaClienteId());
-            
             Projeto proj = new Projeto();
+            Cliente cli = servCli.ListOne(projeto.getEmpresaClienteId());
             proj.setDataInicio(projeto.getDataInicio());
             proj.setDataPrevisaoEntrega(projeto.getDataPrevisaoEntrega());
             proj.setDescricao(projeto.getDescricao());
-            proj.setEmpresaClienteId(cli);
-            proj.setFuncionarioResponsavelId(func);
             proj.setNomeProjeto(projeto.getNomeProjeto());
             proj.setPrioridade(projeto.getPrioridade());
             proj.setStatus(projeto.getStatus());
+            proj.setEmpresaClienteId(cli);
+            
+            if(projeto.getFuncionarioResponsavelId() != null){
+                Funcionario func = servFunc.ListOne(projeto.getFuncionarioResponsavelId());
+                proj.setFuncionarioResponsavelId(func);
+            }
+
+                
 
             serv.AddProj(proj);
             return ResponseEntity.ok("Ok");
@@ -138,6 +167,12 @@ public class ProjetoController {
     @PutMapping(path = "/projetos")
     public ResponseEntity<String> updateProj(@RequestParam long id, @RequestBody ProjetoDTO json){
         serv.UpdateProj(id,json);
+        return ResponseEntity.ok("Ok");
+    }
+
+    @PutMapping(path = "/projetosAtribuir")
+    public ResponseEntity<String> atribuirProj(@RequestParam long id, @RequestParam long func){
+        serv.AtribuiProj(id,func);
         return ResponseEntity.ok("Ok");
     }
 }

@@ -56,5 +56,12 @@ public class ProjetoService {
 
         projetoRepository.save(aProj);
     }
+
+    public void AtribuiProj(long idProj, long nProj){
+        Projeto aProj = ListOne(idProj);
+        aProj.setFuncionarioResponsavelId(funcionarioService.ListOne(nProj));
+
+        projetoRepository.save(aProj);
+    }
     
 }

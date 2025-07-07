@@ -3,7 +3,7 @@ package com.mycompany.pfp.models;
 import java.time.LocalDate;
 
 public class ProjetoDTO{
-    private Integer id;
+    private Long id;
     private String nomeProjeto;
     private String descricao;
     private LocalDate dataInicio;
@@ -11,14 +11,34 @@ public class ProjetoDTO{
     private String status;
     private String prioridade;
     private Long empresaClienteId;
+    private String EmpresaCliente;
     private Long funcionarioResponsavelId;
+    private String funcionarioResponsavel;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
     public String getNomeProjeto() {
         return nomeProjeto;
+    }
+
+    
+
+    public String getEmpresaCliente() {
+        return EmpresaCliente;
+    }
+
+    public void setEmpresaCliente(String empresaCliente) {
+        EmpresaCliente = empresaCliente;
+    }
+
+    public String getFuncionarioResponsavel() {
+        return funcionarioResponsavel;
+    }
+
+    public void setFuncionarioResponsavel(String funcionarioResponsavel) {
+        this.funcionarioResponsavel = funcionarioResponsavel;
     }
 
     public void setNomeProjeto(String nomeProjeto) {
@@ -79,6 +99,10 @@ public class ProjetoDTO{
 
     public void setFuncionarioResponsavelId(Long funcionarioResponsavelId) {
         this.funcionarioResponsavelId = funcionarioResponsavelId;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     

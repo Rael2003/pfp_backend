@@ -35,7 +35,7 @@ public class Projeto {
     private Cliente empresaClienteId;
 
     @ManyToOne
-    @JoinColumn(name = "funcionario_responsavel_id", nullable = false)
+    @JoinColumn(name = "funcionario_responsavel_id")
     private Funcionario funcionarioResponsavelId;
 
     public Long getId() {
