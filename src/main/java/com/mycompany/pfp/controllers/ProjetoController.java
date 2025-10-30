@@ -40,8 +40,31 @@ public class ProjetoController {
     }
     
     @GetMapping(path = "/projetos")
-    public List<Projeto> ListaProjetos(){
-        return serv.ListAll();
+    public List<ProjetoDTO> ListaProjetos(){
+        List<Projeto> proj = serv.ListAll();
+        List<ProjetoDTO> dto = new ArrayList<>();
+
+        for (Projeto lt : proj) {
+            ProjetoDTO tmp = new ProjetoDTO();
+
+            tmp.setId(lt.getId());
+            tmp.setDescricao(lt.getDescricao());
+            tmp.setDataInicio(lt.getDataInicio());
+            tmp.setDataPrevisaoEntrega(lt.getDataPrevisaoEntrega());
+            tmp.setEmpresaCliente(lt.getEmpresaClienteId().getNomeEmpresa());
+            tmp.setEmpresaClienteId(lt.getEmpresaClienteId().getId());
+            if(lt.getFuncionarioResponsavelId() != null){
+                tmp.setFuncionarioResponsavel(lt.getFuncionarioResponsavelId().getNome_completo());
+                tmp.setFuncionarioResponsavelId(lt.getFuncionarioResponsavelId().getId());
+            }
+            tmp.setNomeProjeto(lt.getNomeProjeto());
+            tmp.setPrioridade(lt.getPrioridade());
+            tmp.setStatus(lt.getStatus());
+
+            dto.add(tmp);
+        }
+
+        return dto;
     }
 
     @GetMapping(path = "/projetosSemAtribuicao")
