@@ -11,7 +11,25 @@ public class PedidoEstoqueProjetoDTO {
     private float quantidadeAtendida;
     private Date dataPedido;
     private String status;
+    private Long ProjetoId;
+    private String Projeto;
     
+    public Long getProjetoId() {
+        return ProjetoId;
+    }
+
+    public void setProjetoId(Long projetoId) {
+        ProjetoId = projetoId;
+    }
+
+    public String getProjeto() {
+        return Projeto;
+    }
+
+    public void setProjeto(String projeto) {
+        Projeto = projeto;
+    }
+
     public Long getId() {
         return id;
     }

@@ -51,6 +51,8 @@ public class PedidoEstoqueController {
             dado.setQuantidadeSolicitada(pedidoEstoque.getQuantidadeSolicitada());
             dado.setStatus(pedidoEstoque.getStatus());
             dado.setItemProjeto(pedidoEstoque.getItemProjetoId().getTitulo_item());
+            dado.setProjetoId(pedidoEstoque.getItemProjetoId().getProjeto().getId());
+            dado.setProjeto(pedidoEstoque.getItemProjetoId().getProjeto().getNomeProjeto());
 
             ret.add(dado);
         }
