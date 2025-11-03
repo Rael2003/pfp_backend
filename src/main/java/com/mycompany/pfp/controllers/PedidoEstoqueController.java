@@ -36,8 +36,26 @@ public class PedidoEstoqueController {
     }
 
     @GetMapping(path = "/pedidoEstoque")
-    public List<PedidoEstoque> Listaprojetos(){
-        return serv.ListAll();
+    public List<PedidoEstoqueProjetoDTO> Listaprojetos(){
+
+        List<PedidoEstoque> ped = serv.ListAll();
+        List<PedidoEstoqueProjetoDTO> ret = new ArrayList<>();
+
+        for (PedidoEstoque pedidoEstoque : ped) {
+            PedidoEstoqueProjetoDTO dado = new PedidoEstoqueProjetoDTO();
+            dado.setId(pedidoEstoque.getId());
+            dado.setDataPedido(pedidoEstoque.getDataPedido());
+            dado.setItemProjetoId(pedidoEstoque.getItemProjetoId().getId());
+            dado.setProdutoEstoqueId(pedidoEstoque.getProdutoEstoqueId().getId());
+            dado.setQuantidadeAtendida(pedidoEstoque.getQuantidadeAtendida());
+            dado.setQuantidadeSolicitada(pedidoEstoque.getQuantidadeSolicitada());
+            dado.setStatus(pedidoEstoque.getStatus());
+            dado.setItemProjeto(pedidoEstoque.getItemProjetoId().getTitulo_item());
+
+            ret.add(dado);
+        }
+
+        return ret;
     }
 
     @GetMapping(path = "/pedidoEstoqueProj")
